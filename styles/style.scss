@@ -1,5 +1,55 @@
+$mediaMaxWidth: 1260px;
+$mediaBp1Width: 960px;
+$mediaMinWidth: 480px;
+
+@function translate-media-condition($c) {
+  $condMap: (
+    "screen": "only screen",
+    "print": "only print",
+    "retina": "(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 120dpi)",
+    ">maxWidth": "(min-width: #{$mediaMaxWidth + 1})",
+    "<maxWidth": "(max-width: #{$mediaMaxWidth})", 		
+    ">bp1Width": "(min-width: #{$mediaBp1Width + 1})",
+    "<bp1Width": "(max-width: #{$mediaBp1Width})",
+    ">minWidth": "(min-width: #{$mediaMinWidth + 1})",
+    "<minWidth": "(max-width: #{$mediaMinWidth})"
+  );
+  @return map-get( $condMap, $c );
+}
+
+// The mdia mixin
+@mixin media($args...) {
+  $query: "";
+  @each $arg in $args {
+    $op: "";
+    @if ( $query != "" ) {
+      $op: " and ";
+    }
+    $query: $query + $op + translate-media-condition($arg);
+  }
+  @media #{$query}  { @content; }
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+    @include media("<maxWidth", ">bp1Width"){
+        font-size:13px;
+    }
+    @include media("<bp1Width", ">minWidth"){
+        font-size: 10px;
+    }
+    @include media("<minWidth"){
+        font-size: 9px;
+    }
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
     background-color: #fefefe;
+    width: 100%;
 }
 /************************************************NAVBAR************************************************/
 $nav_bg_color: #ab47bc;
@@ -24,68 +74,76 @@ $weight9_color: #880e4f;
 
 #nav_container{
     position: relative;
-}
-
-#nav_bar {
-    position: relative;
-    background-color: $nav_bg_color;
-    border: none;
-    margin: 0px;
-    z-index: 1000;
-    font-size: 1rem;
-    li {
+    width: 100%;
+    #nav_bar {
         display: flex;
-        flex-direction: column-reverse;
-        justify-content: center;
+        flex-direction: row;
+        position: relative;
+        background-color: $nav_bg_color;
+        border: none;
         margin: 0px;
-        #home {
-            font-family: 'Damion', cursive;
-            font-size: 2rem;
-            margin-right: 50px;
-            margin-left: 50px;
-            padding-bottom: 0px;
-            padding-top: 0px;
-            color: $nav_text_color;
-            &:hover{
-                background-color: $nav_bg_color;                
+        z-index: 1000;
+        font-size: 1rem;
+        li {
+            flex-shrink: 1;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: center;
+            margin: 0px;
+            #home {
+                font-family: 'Damion', cursive;
+                font-size: 2rem;
+                margin-right: 0.5rem;
+                margin-left: 0.5rem;
+                padding-bottom: 0px;
+                padding-top: 0px;
+                color: $nav_text_color;
+                &:hover{
+                    background-color: $nav_bg_color;                
+                }
             }
+            a {
+                border: none;
+                font-size: 1rem;
+                color: $nav_text_color;
+                padding: 0.6rem;
+                &#selected_algorithm, &#maze{
+                    font-size: 1.2rem;
+                    margin-top: auto;
+                }
+                &._opened{
+                    background-color: $sub_nav_bg_color;
+                }
+                &:hover{
+                    background-color: $sub_nav_bg_color;
+                }
+                &#selected_algorithm, &#maze{
+                    margin-right: 0.2rem;
+                }
+                &#RUN, &#random_weights, &#reset_weights, &#reset_walls, &#reset_grid, &#tutorial{
+                    border-radius: 5px;
+                }
+                &#tutorial{
+                    margin-right: 0.5rem;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+            #RUN{
+                // background-color: #5c6bc0;
+                &.disabled{
+                    color: #cacaca;
+                }
+            }
+    
         }
-        a {
-            border: none;
-            font-size: 1rem;
-            color: $nav_text_color;
-            &#selected_algorithm, &#maze{
-                font-size: 1.2rem;
-                margin-top: auto;
-            }
-            &._opened{
-                background-color: $sub_nav_bg_color;
-            }
-            &:hover{
-                background-color: $sub_nav_bg_color;
-            }
-            &#selected_algorithm, &#maze{
-                margin-right: 3px;
-            }
-            &#RUN, &#random_weights, &#reset_weights, &#reset_walls, &#reset_grid, &#tutorial{
-                border-radius: 5px;
-            }
-            &#tutorial:focus{
-                outline: none;
-            }
+        #RUN_container{
+            margin-left: auto;
         }
-        #RUN{
-            // background-color: #5c6bc0;
-            &.disabled{
-                color: #cacaca;
-            }
-        }
-
-    }
-    #RUN_container{
-        margin-left: auto;
     }
 }
+
 
 .nav-tabs .nav-item.show .nav-link {
     background-color: #df78ef;
@@ -191,8 +249,8 @@ $weight9_color: #880e4f;
         position: relative;
         margin-left: 10px;
         margin-right: 10px;
-        height: 3vh;
-        min-width: 3vh;
+        height: 2rem;
+        min-width: 2rem;
     }
     #starting_node{
         background-color: $start_node_bg_color;
@@ -223,30 +281,17 @@ $weight9_color: #880e4f;
     #info{
         margin: 0 auto 0 auto;
         p{
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
     }
     #starting_node i, #ending_node i, #weighted_node i{
-        font-size: 1.8vh;
+        font-size: 1.2rem;
         color: #fcfcfc;
         margin: 0 auto 0 auto;
     }
 }
 
 /************************************************GRID************************************************/
-
-#grid_container {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    justify-content: center;
-}
-
-#grid_table {
-    border-spacing: 0px;
-    border-collapse: collapse;
-}
-
 @keyframes wall{
     0%{
         transform: scale(0.8);
@@ -270,89 +315,137 @@ $weight9_color: #880e4f;
     }
 }
 
-.node {
-    padding: 0px;
-    height: 3vh;
-    min-width: 3vh;
-    border: 1px solid $empty_node_border_color;
-    background-color: $empty_node_bg_color;
-    transition: background-color 300ms ease forwards; 
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    z-index: 0;
-    text-align: center;
-    &.wall{
-        border-color: $wall_node_color!important;
-        background-color: $wall_node_color!important;
-        animation: wall 100ms ease forwards;
-    }
-    &.start{
-        background-color: $start_node_bg_color;
-        border: none;
-    }
-    &.start.expanded{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        animation: _expanded 300ms ease forwards;
-        position: absolute;
-        background-color: $start_node_bg_color!important;
-        border-radius: 50%;
-        z-index: 1000;
-    }
-    &.end{
-        background-color: $end_node_bg_color;
-        border: none;
-        z-index: 1000;
-    }
-    &.end.expanded{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        animation: _expanded 300ms ease forwards;
-        position: absolute;
-        background-color: $end_node_bg_color!important;
-        border-radius: 50%;
-        z-index: 1000;
-    }
-    &.start i, &.end i{
-        font-size: 1.8vh;
-        color: #fcfcfc;
-    }
-    &.weight{
-        .weight1, .weight2, .weight3, .weight4, .weight5, .weight6, .weight7, .weight8, .weight9{
-            animation: weight_scale 1300ms ease forwards;
-        }
-        .weight1{
-            color: $weight1_color;
-        }
-        .weight2{
-            color: $weight2_color;
-        }
-        .weight3{
-            color: $weight3_color;
-        }
-        .weight4{
-            color: $weight4_color;
-        }
-        .weight5{
-            color: $weight5_color;
-        }
-        .weight6{
-            color: $weight6_color;
-        }
-        .weight7{
-            color: $weight7_color;
-        }
-        .weight8{
-            color: $weight8_color;
-        }
-        .weight9{
-            color: $weight9_color;
+#grid_container {
+    display: flex;
+    height: 80vh;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    #grid_table {
+        width: 90%;
+        border-spacing: 0px;
+        border-collapse: collapse;
+        #grid_body{
+            .grid_row{
+                .node {
+                    @include media("<maxWidth", ">bp1Width"){
+                        height: 1.5rem;
+                    }
+                    @include media("<bp1Width", ">minWidth"){
+                        height: 1.3rem;
+                    }
+                    @include media("<minWidth"){
+                        height: 1rem;
+                    }
+                    position: relative;
+                    padding: 0px;
+                    height: 1.8rem;
+                    width: 1.8rem;
+                    border: 1px solid $empty_node_border_color;
+                    background-color: $empty_node_bg_color;
+                    transition: background-color 300ms ease forwards; 
+                    user-select: none;
+                    z-index: 0;
+                    text-align: center;
+                    &.wall{
+                        border-color: $wall_node_color!important;
+                        background-color: $wall_node_color!important;
+                        animation: wall 100ms ease forwards;
+                    }
+                    &.start{
+                        background-color: $start_node_bg_color;
+                        border: none;
+                        i{
+                            @include media("<maxWidth", ">bp1Width"){
+                                font-size: 0.8rem;
+                            }
+                            @include media("<bp1Width", ">minWidth"){
+                                font-size: 0.6rem;
+                            }
+                            @include media("<minWidth"){
+                                font-size: 0.5rem;
+                            }
+                            font-size: 1rem;
+                            color: #fcfcfc;
+                        }
+                        &.expanded{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            animation: _expanded 300ms ease forwards;
+                            position: absolute;
+                            background-color: $start_node_bg_color!important;
+                            border-radius: 50%;
+                            z-index: 1000;
+                        }
+                    }
+                    &.end{
+                        background-color: $end_node_bg_color;
+                        border: none;
+                        i{
+                            @include media("<maxWidth", ">bp1Width"){
+                                font-size: 0.8rem;
+                            }
+                            @include media("<bp1Width", ">minWidth"){
+                                font-size: 0.6rem;
+                            }
+                            @include media("<minWidth"){
+                                font-size: 0.5rem;
+                            }
+                            left: 24%;
+                            font-size: 1rem;
+                            color: #fcfcfc;
+                        }
+                        &.expanded{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            animation: _expanded 300ms ease forwards;
+                            position: absolute;
+                            background-color: $end_node_bg_color!important;
+                            border-radius: 50%;
+                            z-index: 1000;
+                        }
+                    }
+                    &.weight{
+                        .weight1, .weight2, .weight3, .weight4, .weight5, .weight6, .weight7, .weight8, .weight9{
+                            animation: weight_scale 1300ms ease forwards;
+                        }
+                        .weight1{
+                            color: $weight1_color;
+                        }
+                        .weight2{
+                            color: $weight2_color;
+                        }
+                        .weight3{
+                            color: $weight3_color;
+                        }
+                        .weight4{
+                            color: $weight4_color;
+                        }
+                        .weight5{
+                            color: $weight5_color;
+                        }
+                        .weight6{
+                            color: $weight6_color;
+                        }
+                        .weight7{
+                            color: $weight7_color;
+                        }
+                        .weight8{
+                            color: $weight8_color;
+                        }
+                        .weight9{
+                            color: $weight9_color;
+                        }
+                    }
+                    i{
+                        position: absolute;
+                        left: 30%;
+                        top: 20%;
+                    }
+                }
+            }
         }
     }
 }
