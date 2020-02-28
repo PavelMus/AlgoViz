@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>AlogViz</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://kit.fontawesome.com/4efab715ac.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <div id="nav_container">
+        <ul class="nav nav-tabs" id="nav_bar">
+            <li class="nav-item" id="home_container">
+                <a href="./index.html" class="nav-link" id="home">AlgoViz</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" id="selected_algorithm">
+                    <i class="fas fa-sort-amount-down-alt"></i>
+                    Sorting Algorithms
+                </a>
+            </li>
+            <li class="nav-item" id="RUN_container">
+                <a href="#" class="nav-link disabled" id="RUN">
+                    <i class="fas fa-play"></i>
+                    Run
+                </a>
+            </li>
+            <li class="nav-item" id="shuffle_container">
+                <a href="#" class="nav-link" id="shuffle">
+                    <i class="fas fa-th"></i>
+                    Shuffle
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="algo_tabs" class="_closed">
+        <ul>
+            <li>
+                <a href="#bubble" id="bubble">
+                    <i class="far fa-comments"></i>
+                    Bubble Sort
+                </a>
+            </li>
+            <li>
+                <a href="#cocktail" id="cocktail">
+                    <i class="fas fa-cocktail"></i>
+                    Cocktail Shaker Sort
+                </a>
+            </li>
+            <li>
+                <a href="#insertion" id="insertion">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Insertion Sort
+                </a>
+            </li>
+            <li>
+                <a href="#heap" id="heap">
+                    <i class="fas fa-mountain"></i>
+                    Heapsort
+                </a>
+            </li>
+            <li>
+                <a href="#merge" id="merge">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                    Merge Sort
+                </a>
+            </li>
+            <li>
+                <a href="#quick" id="quick">
+                    <i class="fas fa-bolt"></i>
+                    Quick Sort
+                </a>
+            </li>
+            <li>
+                <a href="#selection" id="selection">
+                    <i class="fas fa-hand-pointer"></i>
+                    Selection Sort
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="description_container">
+        <div id="description">
+            <div id="time_complexity">
+                <h6><i class="fas fa-clock"></i> Time Complexity</h6>
+                <p>Worst-case: <span id="wct">-</span></p>
+                <p>Best-case: <span id="bct">-</span></p>
+                <p>Average: <span id="avt">-</span></p>
+            </div>
+            <div id="space_complexity">
+                <h6><i class="fas fa-layer-group"></i> Space Complexity</h6>
+                <p>Worst-case: <span id="wcs">-</span></p>
+            </div>
+        </div>
+        <div id="info">
+            <p>Click the Tutorial button to see how the app works or select an algorithm and click Run.</p>
+        </div>
+    </div>
+    <div id="sort_grid_container">
+        <div id="sort_grid">
+        </div>
+    </div>
+
+    <script type="module" src="./sortingScripts.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"
+        integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

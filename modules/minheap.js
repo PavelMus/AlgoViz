@@ -1,4 +1,4 @@
-export default class MinHeap{
+export class GridMinHeap{
     constructor(){
         this.heap = [];
         this.heapMap = new Map();
@@ -86,5 +86,70 @@ export default class MinHeap{
         const idx = this.heapMap.get(obj.id);        
         this.heap[idx].removed = true;
         this.insert(obj, priority);
+    }
+}
+
+export class MinHeap{
+    constructor(){
+        this.heap = [];
+
+        this.insert = this.insert.bind(this);
+        this.getLength = this.getLength.bind(this);
+        this.remove = this.remove.bind(this);
+        this.heapify = this.heapify.bind(this);
+        this.has = this.has.bind(this);
+        this.update = this.update.bind(this);
+    }
+
+    getLength(){
+        return this.heap.length;
+    }
+
+    insert(num){
+        this.heap.push(num);
+        let curIdx = this.heap.length - 1;
+        let curParentIdx = Math.floor((curIdx-1)/2);
+
+        while(curIdx !== 0 && this.heap[curIdx] < this.heap[curParentIdx]){
+            const parent = this.heap[curParentIdx];
+            this.heap[curParentIdx] = this.heap[curIdx];
+            this.heap[curIdx] = parent;
+
+            curIdx = curParentIdx;
+            curParentIdx = Math.floor((curIdx-1) / 2);
+        }
+    }
+    remove(){
+        if(this.heap.length === 0){
+            return null;
+        }
+        if(this.heap.length === 1){
+            return this.heap.pop();
+        }
+
+        const output = this.heap[0];
+        this.heap[0] = this.heap.pop();
+
+        this.heapify(0);
+
+        return output
+    }
+    heapify(index){
+        let curIdx = index;
+        let [l, r] = [2*curIdx + 1, 2*curIdx + 2];
+        while (l < this.heap.length){
+            let curChildIdx = l;
+            if(r < this.heap.length - 1){
+                curChildIdx = this.heap[r] < this.heap[l] ? r : l;
+            }
+            if(this.heap[curIdx] > this.heap[curChildIdx]){
+                const curNum = this.heap[curIdx];
+                this.heap[curIdx] = this.heap[curChildIdx];
+                this.heap[curChildIdx] = curNum;
+            }
+            curIdx = curChildIdx;
+            l = 2*curIdx + 1;
+            r = 2*curIdx + 2;
+        }
     }
 }

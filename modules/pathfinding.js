@@ -1,5 +1,5 @@
 import Queue from "./Queue.js";
-import MinHeap from "./minheap.js";
+import {GridMinHeap} from "./minheap.js";
 
 export async function aStarE(grid){
     grid.resetNodeDistances();
@@ -7,7 +7,7 @@ export async function aStarE(grid){
 
     const grid_nodes = grid.grid_nodes;
     const visited = new Map();
-    const heap = new MinHeap();
+    const heap = new GridMinHeap();
 
     const end_row = grid.end_node.row;
     const end_col = grid.end_node.col;
@@ -49,7 +49,7 @@ export async function aStarM(grid){
 
     const grid_nodes = grid.grid_nodes;
     const visited = new Map();
-    const heap = new MinHeap();
+    const heap = new GridMinHeap();
 
     const end_row = grid.end_node.row;
     const end_col = grid.end_node.col;
@@ -91,7 +91,7 @@ export async function bestFS(grid){
 
     const grid_nodes = grid.grid_nodes;
     const visited = new Map();
-    const heap = new MinHeap();
+    const heap = new GridMinHeap();
 
     let cur_node = grid.start_node;
     heap.insert(cur_node, cur_node.weight);
@@ -119,7 +119,7 @@ export async function dijkstra(grid){
 
     const grid_nodes = grid.grid_nodes;
     const visited = new Map();
-    const heap = new MinHeap();
+    const heap = new GridMinHeap();
 
     let cur_node = grid.start_node;
     cur_node.distance = 0;
