@@ -10,208 +10,34 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Damion&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Damion|Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
-    <!-- Tutorial Modal -->
-    <div class="modal fade" id="tutorial_modal" tabindex="-1" role="dialog" aria-labelledby="tutorial_modal_center_title" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="tutorial_modal_title">AlgoViz Tutorial</h5>
-            </div>
-            <div class="modal-body">
-                <h5>Visualizing Algorithms</h5> 
-                <img src="./imgs/AlgoViz Tutorial 1.gif" alt=""/>
-                <p>In order to visualize an algorithm, click the <span><i class="fas fa-braille" aria-hidden="true"></i> Algorithms</span> button in the top right corner and select which algorithm you'd like to run.</p>
-                <p>Once an algorithm is selected, hit the <span><i class="fas fa-play" aria-hidden="true"></i> Run</span> button and watch it work.</p> 
-                <h5>Adding Walls</h5>
-                <img src="./imgs/AlgoViz Tutorial 2.gif" alt="">
-                <p>Walls act as obstacles within the grid which the pathfinding algorithm cannot walk through, only around.</p>
-                <p>To add a wall, just simply left click on any unvisited grid node, or click-hold-drag to add walls anywhere in your mouses's path.</p>
-                <p>Removing walls is the same as adding them, just simply left-click or click-hold-drag with your mouse on already existing walls to remove them.</p>
-                <p>Alternatively, you can also generate a maze.</p>
-                <h5>Generating Mazes</h5>
-                <p>Click the <span><i class="fas fa-wave-square" aria-hidden="true"></i> Generate Maze</span> button next to the <span><i class="fas fa-braille" aria-hidden="true"></i> Algorithms</span> to see a drop-down menu of different maze generating algorithms.</p>
-                <p>Select a maze generating algorithm that you'd like to try out and the maze will get generated.</p>
-                <p>After the maze is generated, select a pathfinding algorithm and click <span><i class="fas fa-play" aria-hidden="true"></i> Run</span> to see how your selected algorithm walks through the maze to find the Ending Node.</p>
-                <h5>Randomizing Weights</h5>
-                <p>Some algorithms require weighted edges to function. By default, all connected nodes are set with a weight of 1.</p>
-                <p>To randomize the grids weights, click the <span><i class="fas fa-weight-hanging" aria-hidden="true"></i> Randomize Weights</span> button next to <span><i class="fas fa-play" aria-hidden="true"></i> Run</span> button.</p>
-                <p>All nodes will have a random weight assigned to them, and the weighted nodes will have a red weight icon <span class="weight5"><i class="fas fa-weight-hanging" aria-hidden="true"></i></span> in the middle. Weight icons will also be color coded, the darker the color, the greater the weight.</p>
-                <h5>Resetting The Grid</h5>
-                <p>There are several ways to reset the current state of the grid.</p>
-                <ul>
-                    <li><span><i class="fas fa-weight"></i> Reset Weights</span> : Removes all weighted nodes from the grid and sets them the default value of 1.</li>
-                    <li><span><i class="fas fa-border-none" aria-hidden="true"></i> Reset Walls</span> : Removes all wall nodes from the grid and sets them to unvisited state.</li>
-                    <li><span><i class="fas fa-th" aria-hidden="true"></i> Reset Grid</span> : Completely resets all nodes on the grid to their default states, removing all weights, walls and visited nodes.</li>
-                </ul>
-                <h5>View Tutorial</h5>
-                <p>In order to view the tutorial for this app, click the <span><i class="fas fa-exclamation-circle" aria-hidden="true"></i> TUTORIAL</span> button in the top right corner........ but I guess you've already figured that out. Thanks, and enjoy 😉</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
+    <div id="AlgoViz_container">
+        <div id="AlgoViz">
+            <h1>AlgoViz</h1>
         </div>
-    </div>
-    <!-- Nav tabs -->
-    <div id="nav_container">
-        <ul class="nav nav-tabs" id="nav_bar">
-            <li class="nav-item" id="home_container">
-                <a href="/" class="nav-link" id="home">AlgoViz</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" id="selected_algorithm">
-                    <i class="fas fa-braille"></i>
-                    Algorithms
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link" id="maze">
-                    <i class="fas fa-wave-square"></i>
-                    Generate Maze
-                </a>
-            </li>
-            <li class="nav-item" id="RUN_container">
-                <a href="#" class="nav-link disabled" id="RUN">
-                    <i class="fas fa-play"></i>
-                    Run
-                </a>
-            </li>
-            <li class="nav-item" id="random_weights_container">
-                <a href="#" class="nav-link" id="random_weights">
-                    <i class="fas fa-weight-hanging"></i>
-                    Randomize Weights
-                </a>
-            </li>
-            <li class="nav-item" id="reset_weights_container">
-                <a href="#" class="nav-link" id="reset_weights">
-                    <i class="fas fa-weight"></i>
-                    Reset Weights
-                </a>
-            </li>
-            <li class="nav-item" id="reset_walls_container">
-                <a href="#" class="nav-link" id="reset_walls">
-                    <i class="fas fa-border-none"></i>
-                    Reset Walls
-                </a>
-            </li>
-            <li class="nav-item" id="reset_grid_container">
-                <a href="#" class="nav-link" id="reset_grid">
-                    <i class="fas fa-th"></i>
-                    Reset Grid
-                </a>
-            </li>
-            <li class="nav-item" id="tutorial_container">
-                <a href="#" class="nav-link" id="tutorial" data-toggle="modal" data-target="#tutorial_modal">
-                    <i class="fas fa-exclamation-circle"></i>
-                    TUTORIAL
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div id="algo_tabs" class="_closed">
-        <ul>
-            <li>
-                <a href="#a*" id="a_star_e">
-                    <i class="fas fa-star-half-alt"></i>
-                    A* Search (E)
-                </a>
-            </li>
-            <li>
-                <a href="#a*" id="a_star_m">
-                    <i class="far fa-star"></i>
-                    A* Search (M)
-                </a>
-            </li>
-            <li>
-                <a href="#best" id="best_PR">
-                    <i class="far fa-thumbs-up"></i>
-                    Best First Search
-                </a>
-            </li>
-            <li>
-                <a href="#BFS" id="BFS_PR">
-                    <i class="fas fa-expand-arrows-alt"></i>
-                    Breadth First Search
-                </a>
-            </li>
-            <li>
-                <a href="#DFS" id="DFS_PR">
-                    <i class="fas fa-arrow-down"></i>
-                    Depth First Search
-                </a>
-            </li>
-            <li>
-                <a href="#dijkstra" id="DJK_PR">
-                    <i class="fas fa-random"></i>
-                    Dijkstra Shortest Path
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div id="maze_tabs" class="_closed">
-        <ul>
-            <li>
-                <a href="#" id="eller">
-                    <i class="fas fa-arrows-alt-h"></i>
-                    Eller's Algorithm
-                </a>
-            </li>
-            <li>
-                <a href="#rb" id="maze_rb">
-                    <i class="fas fa-reply-all"></i>
-                    Recursive Backtracking
-                </a>
-            </li>
-            <li>
-                <a href="#rd" id="maze_rd">
-                    <i class="fas fa-divide"></i>
-                    Recursive Division
-                </a>
-            </li>
-            <li>
-                <a href="#" id="kruskal">
-                    <i class="fab fa-korvue"></i>
-                    Kruskal Algorithm
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div id="info_container">
-        <div id="starting_node">
-            <i class="fas fa-map-marker-alt"></i>
+        <div id="divider">
+            <div id="left_line"></div>
+            <h1>SELECT</h1>
+            <div id="right_line"></div>
         </div>
-        <p>Starting Node</p>
-        <div id="ending_node">
-            <i class="fas fa-medal"></i>
+        <div id="selections">
+            <a href="./pathfinding.html" id="pathfinding">
+                <span>PATHFINDING</span>
+                <div id="pathfinding_img"></div>
+            </a>
+            <a href="./sorting.html" id="sorting">
+                <span>SORTING</span>
+                <div id="sorting_img"></div>
+            </a>
         </div>
-        <p>Ending Node</p>
-        <div id="unvisited_node"></div>
-        <p>Unvisited Node</p>
-        <div id="visited_node"></div>
-        <p>Visited Node</p>
-        <div id="wall_node"></div>
-        <p>Wall Node</p>
-        <div id="weighted_node">
-            <i class="fas fa-weight-hanging"></i>
-        </div>
-        <p>Weighted Node</p>
-        <div id="info">
-            <p>Click the Tutorial button to see how the app works or select an algorithm and click Run.</p>
-        </div>
-    </div>
-    <div id="grid_container">
-        <table id="grid_table">
-            <tbody id="grid_body">
-            </tbody>
-        </table>
+
     </div>
 
-    <script type="module" src="./scripts.js"></script>
+    <!-- <script type="module" src="./scripts.js"></script> -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.js"

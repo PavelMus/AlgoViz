@@ -1,3 +1,151 @@
+#AlgoViz_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #ab47bc;
+}
+
+#AlgoViz_container #AlgoViz h1 {
+  font-family: 'Damion', cursive;
+  font-size: 7rem;
+  color: #ffeb3b;
+}
+
+#AlgoViz_container #divider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+#AlgoViz_container #divider h1 {
+  font-family: 'Roboto';
+  color: white;
+  margin-bottom: 3rem;
+}
+
+#AlgoViz_container #divider #left_line, #AlgoViz_container #divider #right_line {
+  width: 10%;
+  border: 2px solid white;
+  border-bottom: none;
+  margin: 2rem;
+  height: 2rem;
+}
+
+#AlgoViz_container #divider #left_line {
+  border-right: none;
+  border-top-left-radius: 1rem;
+}
+
+#AlgoViz_container #divider #right_line {
+  border-left: none;
+  border-top-right-radius: 1rem;
+}
+
+#AlgoViz_container #selections {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#AlgoViz_container #selections #pathfinding, #AlgoViz_container #selections #sorting {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 50vh;
+  width: 40vh;
+  margin: 0 2rem 2rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 3rem;
+  background-color: #fff1ff;
+  border: 1px solid #fff1ff;
+  border-radius: 1rem;
+  -webkit-transition: 200ms ease-in;
+  transition: 200ms ease-in;
+}
+
+#AlgoViz_container #selections #pathfinding span, #AlgoViz_container #selections #sorting span {
+  font-family: 'Roboto';
+  color: #ffeb3b;
+  background-color: #ab47bc;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+#AlgoViz_container #selections #pathfinding:hover, #AlgoViz_container #selections #sorting:hover {
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+  -webkit-box-shadow: 15px 30px 80px -7px rgba(0, 0, 0, 0.75);
+          box-shadow: 15px 30px 80px -7px rgba(0, 0, 0, 0.75);
+}
+
+#AlgoViz_container #selections #pathfinding {
+  margin-right: 10rem;
+}
+
+#AlgoViz_container #selections #pathfinding #pathfinding_img {
+  margin-top: 2rem;
+  background-image: url("../imgs/pathfinding_still.png");
+  width: 38vh;
+  height: 38vh;
+  background-size: contain;
+}
+
+#AlgoViz_container #selections #pathfinding #pathfinding_img:hover {
+  background-image: url("../imgs/pathfinding.gif");
+}
+
+#AlgoViz_container #selections #sorting {
+  margin-left: 10rem;
+}
+
+#AlgoViz_container #selections #sorting #sorting_img {
+  margin-top: 2rem;
+  background-image: url("../imgs/sorting_still.png");
+  width: 38vh;
+  height: 38vh;
+  background-size: contain;
+}
+
+#AlgoViz_container #selections #sorting #sorting_img:hover {
+  background-image: url("../imgs/sorting.gif");
+}
+
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -29,12 +177,17 @@ html {
 
 body {
   background-color: #fefefe;
+  height: 100vh;
   width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 /************************************************NAVBAR************************************************/
 #nav_container {
   position: relative;
+  height: 4vh;
+  min-height: 3rem;
   width: 100%;
 }
 
@@ -49,6 +202,8 @@ body {
   position: relative;
   background-color: #ab47bc;
   border: none;
+  height: 4vh;
+  min-height: 3rem;
   margin: 0px;
   z-index: 1000;
   font-size: 1rem;
@@ -305,6 +460,8 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 20px 5% 20px 5%;
+  height: 8vh;
+  min-height: 3rem;
 }
 
 #info_container #starting_node, #info_container #ending_node, #info_container #unvisited_node, #info_container #visited_node, #info_container #wall_node, #info_container #weighted_node {
@@ -436,7 +593,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 80vh;
+  height: 88vh;
   position: relative;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -448,9 +605,13 @@ body {
 }
 
 #grid_container #grid_table {
-  width: 90%;
+  width: 98%;
   border-spacing: 0px;
   border-collapse: collapse;
+}
+
+#grid_container #grid_table #grid_body .grid_row {
+  height: 3.2vh;
 }
 
 #grid_container #grid_table #grid_body .grid_row .node {
@@ -539,6 +700,8 @@ body {
   position: absolute;
   background-color: #42a5f5 !important;
   border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
   z-index: 1000;
 }
 
@@ -587,6 +750,8 @@ body {
   position: absolute;
   background-color: #ff7043 !important;
   border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
   z-index: 1000;
 }
 

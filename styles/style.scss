@@ -1,3 +1,5 @@
+@import 'index';
+
 $mediaMaxWidth: 1260px;
 $mediaBp1Width: 960px;
 $mediaMinWidth: 480px;
@@ -49,7 +51,10 @@ html {
 
 body {
     background-color: #fefefe;
+    height: 100vh;
     width: 100%;
+    padding: 0;
+    margin: 0;
 }
 /************************************************NAVBAR************************************************/
 $nav_bg_color: #ab47bc;
@@ -74,6 +79,8 @@ $weight9_color: #880e4f;
 
 #nav_container{
     position: relative;
+    height: 4vh;
+    min-height: 3rem;
     width: 100%;
     #nav_bar {
         display: flex;
@@ -81,6 +88,8 @@ $weight9_color: #880e4f;
         position: relative;
         background-color: $nav_bg_color;
         border: none;
+        height: 4vh;
+        min-height: 3rem;
         margin: 0px;
         z-index: 1000;
         font-size: 1rem;
@@ -242,6 +251,8 @@ $weight9_color: #880e4f;
     flex-direction: row;
     justify-content: center;
     padding: 20px 5% 20px 5%;
+    height: 8vh;
+    min-height: 3rem;
     #starting_node, #ending_node, #unvisited_node, #visited_node, #wall_node, #weighted_node{
         display: flex;
         flex-direction: column;
@@ -317,16 +328,17 @@ $weight9_color: #880e4f;
 
 #grid_container {
     display: flex;
-    height: 80vh;
+    height: 88vh;
     position: relative;
     flex-direction: row;
     justify-content: center;
     #grid_table {
-        width: 90%;
+        width: 98%;
         border-spacing: 0px;
         border-collapse: collapse;
         #grid_body{
             .grid_row{
+                height: 3.2vh;
                 .node {
                     @include media("<maxWidth", ">bp1Width"){
                         height: 1.5rem;
@@ -376,6 +388,8 @@ $weight9_color: #880e4f;
                             position: absolute;
                             background-color: $start_node_bg_color!important;
                             border-radius: 50%;
+                            width: 2rem;
+                            height: 2rem;
                             z-index: 1000;
                         }
                     }
@@ -404,6 +418,8 @@ $weight9_color: #880e4f;
                             position: absolute;
                             background-color: $end_node_bg_color!important;
                             border-radius: 50%;
+                            width: 2rem;
+                            height: 2rem;
                             z-index: 1000;
                         }
                     }

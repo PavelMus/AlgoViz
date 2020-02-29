@@ -9,8 +9,6 @@ let is_sorted = false;
 let animating_sort = false;
 let phase_one_done = false;
 
-let tutorial_icon_animate = null;
-
 function initAll(){
     initGridBars();
     initButtons();
@@ -186,13 +184,13 @@ function initButtons() {
         };
     };
 
-    // /*************************************RESET BUTTONS*************************************/
+    // /*************************************SHUFFLE BUTTONS*************************************/
 
     const shuffle = document.getElementById('shuffle');
     shuffle.onclick = (e) => {
         e.preventDefault();
         reshufle();
-    }``
+    }
 }
 
 function initGridBars(){
